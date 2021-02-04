@@ -1,4 +1,4 @@
-// reduce: 
+// reduce: Basicamente es tomar una gran cantidad de datos, unirlos y entregar un unico resultado
 
 const carrito = [
   { nombre: 'Monitor 27 Pulgadas', precio: 500 },
