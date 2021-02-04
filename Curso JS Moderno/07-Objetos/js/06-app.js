@@ -19,4 +19,4 @@ const producto = {
 const { nombre, informacion: { fabricacion } } = producto
 
 console.log(nombre)
-console.log(informacion)
+console.log(fabricacion)
