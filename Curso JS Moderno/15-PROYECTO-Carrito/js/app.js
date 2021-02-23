@@ -36,10 +36,27 @@ function leerDatosCurso(curso) {
     cantidad: 1
   }
 
+  // Revisa si un elemeno ya existe en el carrito
+  const existe = articulosCarrito.some( curso => curso.id === infoCurso.id)
+  if(existe){
+    // Actualizamos la cantidad
+    const cursos = articulosCarrito.map(curso => {
+      if(curso.id === infoCurso.id){
+        curso.cantidad++
+        return curso //Retorna el objeto actualizado
+      } else {
+        return curso //Retorna los objetos que no son los duplicados
+      }
+    })
+    articulosCarrito = [...cursos]
+  } else {
+    // Agregamos el curso al carrito
+    articulosCarrito = [...articulosCarrito, infoCurso]
+  }
+
   // console.log(infoCurso)
 
   //Agregar elementos al arreglo de carrito
-  articulosCarrito = [...articulosCarrito, infoCurso]
   console.log(articulosCarrito)
   carritoHTML()
 }
@@ -91,3 +108,6 @@ function limpiarHTML() {
 // Etapa 4: Mostrar el resto de la información
 // En esta etapa se notarán los cambios realizados en la función "carritoHTML". Se han ordenado los td de la imagen, titulo, precio y cantidad de acuerdo al orden de los th (Ver HTML)
 // Adicional se hizo un desestructuring del objeto creado (Curso)
+
+// Etapa 5: Actualización de las cantidades, si el elemento ya esta creado en el carrito de compras
+// En esta etapa se notarán los cambios realizados en la función "leerDatosCurso". Se ha agregado un .some para identificar si un curso seleccionado ya esta en el carrito de compras y de ser asi, actualizará su valor en 1.
