@@ -53,10 +53,23 @@ function carritoHTML() {
   limpiarHTML()
   // Recorre el carrito y genera el HTML
   articulosCarrito.forEach((curso) => {
+    const { imagen, titulo, precio, cantidad, id } = curso;
     const row = document.createElement('tr')
     row.innerHTML = `
       <td>
-        ${curso.titulo}
+        <img src="${imagen}" width="100" >
+      </td>
+      <td>
+        ${titulo}
+      </td>
+      <td>
+        ${precio}
+      </td>
+      <td>
+        ${cantidad}
+      </td>
+      <td>
+        <a hef="#" class="borrar-curso" data-id="${id}" >X</a>
       </td>
     `;
     // Agregando el HTML del carrito en el tbody
@@ -74,3 +87,7 @@ function limpiarHTML() {
     contenedorCarrito.removeChild(contenedorCarrito.firstChild)
   }
 }
+
+// Etapa 4: Mostrar el resto de la información
+// En esta etapa se notarán los cambios realizados en la función "carritoHTML". Se han ordenado los td de la imagen, titulo, precio y cantidad de acuerdo al orden de los th (Ver HTML)
+// Adicional se hizo un desestructuring del objeto creado (Curso)
