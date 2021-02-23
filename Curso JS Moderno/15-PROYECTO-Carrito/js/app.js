@@ -11,6 +11,9 @@ cargarEventListeners()
 function cargarEventListeners() {
   // Cuando agregas un curso presionando el botón "Agregar al carrito"
   listaCursos.addEventListener('click', agregarCurso)
+
+  // Elimina cursos del carrito
+  carrito.addEventListener('click', eliminarCurso)
 }
 
 // Funciones
@@ -19,6 +22,17 @@ function agregarCurso(e) {
   if( e.target.classList.contains('agregar-carrito') ){
     const cursoSeleccionado = e.target.parentElement.parentElement
     leerDatosCurso(cursoSeleccionado)
+  }
+}
+
+// Elimina un curso del carrito
+function eliminarCurso(e){
+  if(e.target.classList.contains('borrar-curso')){
+    const cursoId = e.target.getAttribute('data-id')
+
+    // Elimina del arreglo de articulosCarrito por el data-id
+    articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId)
+    carritoHTML() //Volvemos a iterar sore el carrito y mostramos el nuevo HTML
   }
 }
 
@@ -111,3 +125,6 @@ function limpiarHTML() {
 
 // Etapa 5: Actualización de las cantidades, si el elemento ya esta creado en el carrito de compras
 // En esta etapa se notarán los cambios realizados en la función "leerDatosCurso". Se ha agregado un .some para identificar si un curso seleccionado ya esta en el carrito de compras y de ser asi, actualizará su valor en 1.
+
+// Etapa 6: Eliminar un curso del carrito
+// Bajo esta etapa se ha creado un addEventlistener exclusivo del boton de eliminarCurso que llama una función particular. Dicha funcion se encarga de ubicar el data-id (Atributo diferenciador) con el fin de filtre los resultados que no sean iguales al elemento a eliminar. Luego de eso, se llama nuevamente la función "limpiarHTML" para que refresque el cambio
