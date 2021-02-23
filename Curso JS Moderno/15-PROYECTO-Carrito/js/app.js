@@ -14,6 +14,12 @@ function cargarEventListeners() {
 
   // Elimina cursos del carrito
   carrito.addEventListener('click', eliminarCurso)
+
+  // Vaciar el carrito
+  vaciarCarrito.addEventListener('click', () => {
+    articulosCarrito = [] //Reseteamos el arreglo
+    limpiarHTML() // Eliminamos todo el HTML
+  })
 }
 
 // Funciones
@@ -128,3 +134,6 @@ function limpiarHTML() {
 
 // Etapa 6: Eliminar un curso del carrito
 // Bajo esta etapa se ha creado un addEventlistener exclusivo del boton de eliminarCurso que llama una función particular. Dicha funcion se encarga de ubicar el data-id (Atributo diferenciador) con el fin de filtre los resultados que no sean iguales al elemento a eliminar. Luego de eso, se llama nuevamente la función "limpiarHTML" para que refresque el cambio
+
+// Etapa 7: Vaciar el carrito de compras
+// Una vez mas, se ha creado un eventlistener exclusivo para ese botón, solo que al ser tanto poco código se manejo como una funcion anonima. Solo se hizo un reseteo del arreglo y se llamó a la función limpiar HTML para eliminar el HTML innecesario.
