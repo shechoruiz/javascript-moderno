@@ -2,10 +2,16 @@
 
 // Variables
 const resultado = document.querySelector('#resultado')
+const year = document.querySelector('#year')
+const max = new Date().getFullYear()
+const min = max - 10
 
 // Eventos
 document.addEventListener('DOMContentLoaded', () => {
-  mostrarAutos()
+  mostrarAutos() //Muestra los automoviles al cargar
+
+  // Llenar las opciones de años
+  llenarSelect()
 })
 
 // Funciones
@@ -20,4 +26,15 @@ function mostrarAutos() {
     // Insertar en HTML
     resultado.appendChild(autoHTML)
   })
+}
+
+// Etapa 2: Generación de select para años
+
+function llenarSelect () {
+  for(let i = max; i >= min; i--) {
+    const opcion = document.createElement('option')
+    opcion.value = i
+    opcion.textContent = i
+    year.appendChild(opcion)
+  }
 }
