@@ -107,10 +107,14 @@ function llenarSelect () {
 
 // Etapa 4: filtro por marca
 
-function filtrarAuto() {
+function filtrarAuto() { // Función de alto nivel
   const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor)
-  // console.log(resultado)
-  mostrarAutos(resultado)
+
+  if(resultado.length){
+    mostrarAutos(resultado)
+  } else {
+    noResultado()
+  }
 }
 
 function filtrarMarca(auto) {
@@ -176,4 +180,14 @@ function filtrarColor(auto) {
     return auto.color === color;
   }
   return auto;
+}
+
+// Etapa 9: Mostrar mensaje cuando no hay resultados
+
+function noResultado() {
+  limpiarHTML()
+  const noResultado = document.createElement('div')
+  noResultado.classList.add('alerta', 'error')
+  noResultado.textContent = 'No hay resultados!.. Intenta con otros términos de búsqueda'
+  resultado.appendChild(noResultado)
 }
