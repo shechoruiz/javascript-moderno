@@ -26,7 +26,7 @@ const datosBusqueda = {
 
 // Eventos
 document.addEventListener('DOMContentLoaded', () => {
-  mostrarAutos() //Muestra los automoviles al cargar
+  mostrarAutos(autos) //Muestra los automoviles al cargar
 
   // Llenar las opciones de años
   llenarSelect()
@@ -67,7 +67,9 @@ color.addEventListener('change', e => {
 
 
 // Funciones
-function mostrarAutos() {
+function mostrarAutos(autos) {
+  // Eliminar el HTML previo
+  limpiarHTML();
   autos.forEach(auto => {
     const { marca, modelo, year , puertas, transmision, precio, color } = auto
     const autoHTML = document.createElement('p')
@@ -78,6 +80,13 @@ function mostrarAutos() {
     // Insertar en HTML
     resultado.appendChild(autoHTML)
   })
+}
+
+// Limpiar HTML
+function limpiarHTML() {
+  while(resultado.firstChild){
+    resultado.removeChild(resultado.firstChild)
+  }
 }
 
 // Etapa 2: Generación de select para años
@@ -95,7 +104,8 @@ function llenarSelect () {
 
 function filtrarAuto() {
   const resultado = autos.filter(filtrarMarca).filter(filtrarYear)
-  console.log(resultado)
+  // console.log(resultado)
+  mostrarAutos(resultado)
 }
 
 function filtrarMarca(auto) {
@@ -115,3 +125,6 @@ function filtrarYear(auto) {
   }
   return auto;
 }
+
+// Etapa 6: Mostrar los resultados del filtro en el HTML
+// Se modifica la funcion mostrarAutos con el fin de que reciba argumentos, con el fin de que reciba los autos filtrados. Luego, se crea una función que limpie el HTML antes de que se vuelva a dibujar
