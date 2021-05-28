@@ -8,6 +8,9 @@ const email = document.querySelector('#email')
 const asunto = document.querySelector('#asunto')
 const mensaje = document.querySelector('#mensaje')
 
+const er =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 eventListeners();
 function eventListeners() {
   // Cuando la APP arranca
@@ -44,9 +47,8 @@ function validarFormulario(e){
   }
 
   if(e.target.type === 'email'){
-    const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
     // const resultado = e.target.value.indexOf('@') //Versión vieja
+    // Etapa 5: Validación con expresión regular
     if(er.test( e.target.value )){
       const error = document.querySelector('.error')
       if(error){
@@ -60,6 +62,12 @@ function validarFormulario(e){
       e.target.classList.add('border', 'border-red-500')
       mostrarError('Email no valido')
     }
+  }
+
+  // Etapa 6: Validación de formularios
+  if (er.test(email.value) && asunto.value !== "" && mensaje.value !== "") {
+    btnEnviar.disabled = false;
+    btnEnviar.classList.remove("cursor-not-allowed", "opacity-50");
   }
 }
 
@@ -80,3 +88,6 @@ function mostrarError(mensaje) {
 
 // Etapa 5: Validación con expresiones regulares
 // Haciendo uso de una expresión regular, vamos a hacer la validación del campo de email de manera mas profesional. Adicional se hace la corrección de colores cuando se ingresa o sale de los campos con o sin información valida
+
+// Etapa 6: Validación de texto en formularios
+// Se ha hecho una validación con el fin de revisar que el email, asunto y mensaje tengan valores. De ser así, se ha activado el botón de enviar.
