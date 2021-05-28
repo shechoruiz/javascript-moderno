@@ -2,6 +2,7 @@
 
 // Variables
 const btnEnviar = document.querySelector('#enviar');
+const btnReset = document.querySelector("#resetBtn");
 const formulario = document.querySelector('#enviar-mail')
 
 const email = document.querySelector('#email')
@@ -20,6 +21,12 @@ function eventListeners() {
   email.addEventListener('blur', validarFormulario)
   asunto.addEventListener('blur', validarFormulario)
   mensaje.addEventListener('blur', validarFormulario)
+
+  // Reinicia el formulario
+  btnReset.addEventListener("click", resetearFormulario);
+
+  // Enviar email
+  formulario.addEventListener('submit', enviarEmail)
 }
 
 // Funciones
@@ -33,7 +40,7 @@ function iniciarApp() {
 function validarFormulario(e){
   if(e.target.value.length > 0){
     // Elimina los errores
-    const error = document.querySelector('.error')
+    const error = document.querySelector('p.error')
     if (error) {
       error.remove()
     }
@@ -50,7 +57,7 @@ function validarFormulario(e){
     // const resultado = e.target.value.indexOf('@') //Versión vieja
     // Etapa 5: Validación con expresión regular
     if(er.test( e.target.value )){
-      const error = document.querySelector('.error')
+      const error = document.querySelector('p.error')
       if(error){
         error.remove()
       }
@@ -65,7 +72,7 @@ function validarFormulario(e){
   }
 
   // Etapa 6: Validación de formularios
-  if (er.test(email.value) && asunto.value !== "" && mensaje.value !== "") {
+  if (er.test(email.value) && asunto.value !== '' && mensaje.value !== '') {
     btnEnviar.disabled = false;
     btnEnviar.classList.remove("cursor-not-allowed", "opacity-50");
   }
@@ -81,6 +88,36 @@ function mostrarError(mensaje) {
   if(errores.length === 0 ){
     formulario.appendChild(mensajeError)
   }
+}
+
+// Etapa 7: Configuración de la simulación de envío de correo
+function enviarEmail(e) {
+  e.preventDefault();
+
+  // Mostrar el spinner
+  const spinner = document.querySelector('#spinner')
+  spinner.style.display = 'flex';
+
+  // Después de 3 segundos, ocultar el spinner y mostrar el mensaje
+  setTimeout(() => {
+    spinner.style.display = 'none'
+    // Mensaje de envío correcto
+    const parrafo = document.createElement('p')
+    parrafo.textContent = 'El mensaje se envío correctamente'
+    parrafo.classList.add('text-center', 'my-10', 'p-2', 'bg-green-500', 'text-white', 'font-bold', 'uppercase')
+    // Insertar parrafo antes del spinner
+    formulario.insertBefore(parrafo, spinner)
+    setTimeout(() => {
+      parrafo.remove() // Eliminar el mensaje de éxito de envío de "correo"
+      resetearFormulario()
+    }, 5000);
+  }, 3000);
+}
+
+// Función que resetea el formulario
+function resetearFormulario() {
+    formulario.reset();
+    iniciarApp();
 }
 
 // Etapa 4: Validar un email
