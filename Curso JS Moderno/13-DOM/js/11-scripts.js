@@ -4,8 +4,7 @@ const btnFlotante = document.querySelector('.btn-flotante')
 const footer = document.querySelector('.footer')
 
 btnFlotante.addEventListener('click', () => {
-  if ( footer.classList.contains('activo') ) {
-    // Evalua si la clase 'activo esta declarada en el footer
+  if ( footer.classList.contains('activo') ) { // Evalua si la clase 'activo esta declarada en el footer
     footer.classList.remove('activo') // Elimina la clase 'activo
     btnFlotante.classList.remove('activo') // Elimina la clase 'activo
     btnFlotante.textContent = 'Idioma y Moneda' // Cambia el texto del boton

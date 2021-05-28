@@ -13,4 +13,4 @@ const resultado = carrito.every( producto => producto.precio < 1000)
 console.log(resultado) // True
 
 const resultado2 = carrito.every((producto) => producto.precio < 500)
-console.log(resultado2)
+console.log(resultado2) // False

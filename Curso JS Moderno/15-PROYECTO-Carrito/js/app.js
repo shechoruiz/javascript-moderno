@@ -38,7 +38,7 @@ function eliminarCurso(e){
 
     // Elimina del arreglo de articulosCarrito por el data-id
     articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId)
-    carritoHTML() //Volvemos a iterar sore el carrito y mostramos el nuevo HTML
+    carritoHTML() //Volvemos a iterar sobre el carrito y mostramos el nuevo HTML
   }
 }
 

@@ -2,7 +2,7 @@
 
 let elemento
 
-elemento = document
+elemento = document // Selecciona todo el HTML del documento
 elemento = document.all //Describe todas las etiquetas usadas en la pagina
 elemento = document.head //Trae la información declarada en el head
 elemento = document.body //Trae la información declarada en el body
