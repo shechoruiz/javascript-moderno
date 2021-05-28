@@ -46,10 +46,12 @@ year.addEventListener('change', e => {
 
 minimo.addEventListener('change', e => {
   datosBusqueda.minimo = e.target.value
+  filtrarAuto()
 })
 
 maximo.addEventListener('change', e => {
   datosBusqueda.maximo = e.target.value
+  filtrarAuto()
 })
 
 puertas.addEventListener('change', e => {
@@ -103,7 +105,7 @@ function llenarSelect () {
 // Etapa 4: filtro por marca
 
 function filtrarAuto() {
-  const resultado = autos.filter(filtrarMarca).filter(filtrarYear)
+  const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo)
   // console.log(resultado)
   mostrarAutos(resultado)
 }
@@ -128,3 +130,21 @@ function filtrarYear(auto) {
 
 // Etapa 6: Mostrar los resultados del filtro en el HTML
 // Se modifica la funcion mostrarAutos con el fin de que reciba argumentos, con el fin de que reciba los autos filtrados. Luego, se crea una función que limpie el HTML antes de que se vuelva a dibujar
+
+// Etapa 7: filtrar por precios
+
+function filtrarMinimo(auto) {
+  const { minimo } = datosBusqueda;
+  if (minimo) {
+    return auto.precio >= minimo;
+  }
+  return auto;
+}
+
+function filtrarMaximo(auto) {
+  const { maximo } = datosBusqueda;
+  if (maximo) {
+    return auto.precio <= maximo;
+  }
+  return auto;
+}
