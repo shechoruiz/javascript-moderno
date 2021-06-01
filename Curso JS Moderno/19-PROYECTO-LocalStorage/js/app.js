@@ -22,7 +22,21 @@ function agregarTweet(e) {
     mostrarError('Un mensaje no puede ir vacio')
     return // Evta que se ejecute mas líneas de código
   }
-  console.log('Acá se ejecuta')
+
+  const tweetObj = {
+    id: Date.now(),
+    // tweet: tweet
+    tweet // Una manera reciente de declarar el nombre de la pareja llave - valor. Es similar a la linea anterior
+  }
+
+  // Añadir al arreglo de tweets
+  tweets = [...tweets, tweetObj]
+
+  // Una vez agregado, vamos a crear el HTML
+  crearHTML()
+
+  // Reiniciar el formulario
+  formulario.reset()
 }
 
 // Etapa 2: Validar el formulario
@@ -42,3 +56,22 @@ function mostrarError(error) {
 }
 
 // Etapa 3: Mostrar los tweets
+function crearHTML() {
+  limpiarHTML()
+  if(tweets.length > 0) {
+    tweets.forEach(tweet => {
+      // Crear HTM
+      const li = document.createElement('li')
+      // Añadir el texto
+      li.textContent = tweet.tweet
+      // Añadirlos a su respectivo div
+      listaTweets.appendChild(li)
+    })
+  }
+}
+
+function limpiarHTML() {
+  while(listaTweets.firstChild){
+    listaTweets.removeChild(listaTweets.firstChild)
+  }
+}
